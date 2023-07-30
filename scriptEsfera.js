@@ -16,60 +16,31 @@ var movimientoX = 0;
 document.addEventListener('keydown', function(event) {
   var tecla = event.key;
   
-
-  if (tecla === "ArrowUp") {
-    event.preventDefault();
-    movimientoY = -2;
-  } else if (tecla === "ArrowDown") {
-    event.preventDefault();
-    movimientoY = 2;
-  } else if (tecla === "ArrowLeft") {
-    event.preventDefault();
-    movimientoX = -2;
-  } else if (tecla === "ArrowRight") {
-    event.preventDefault();
-    movimientoX = 2;
-  }
+  movimientoY = (tecla === "ArrowDown") ? (event.preventDefault(), 2) : (tecla === "ArrowUp") ? (event.preventDefault(), -2) : 0;
+  movimientoX = (tecla === "ArrowLeft") ? (event.preventDefault(), -2) : (tecla === "ArrowRight") ? (event.preventDefault(), 2) : 0;
 
   moverEsfera();
+  
 });
 document.addEventListener('keyup', function(event) {
   var tecla = event.key;
-   
-  if (tecla === "ArrowUp" || tecla === "ArrowDown") {
-    movimientoY = 0;
-  } else if (tecla === "ArrowLeft" || tecla === "ArrowRight") {
-    movimientoX = 0;
-  }
+  movimientoY = (tecla === "ArrowUp" || tecla === "ArrowDown") ? 0 : movimientoY;
+  movimientoX = (tecla === "ArrowLeft" || tecla === "ArrowRigth") ? 0 : movimientoX;
 });
 
 function moverEsfera() {
   var nuevaY = y + movimientoY;
   var nuevaX = x + movimientoX;
 
-  // Verificar límites verticales
-  if (nuevaY < limiteSuperior) {
-    y = limiteSuperior;
-  } else if (nuevaY > limiteInferior) {
-    y = limiteInferior;
-  } else {
-    y = nuevaY;
-  }
-
-  // Verificar límites horizontales
-  if (nuevaX < limiteIzquierdo) {
-    x = limiteIzquierdo;
-  } else if (nuevaX > limiteDerecho) {
-    x = limiteDerecho;
-  } else {
-    x = nuevaX;
-  }
+  
+  y = (nuevaY < limiteSuperior) ? limiteSuperior : (nuevaY > limiteInferior) ?  limiteInferior : nuevaY;
+  x = (nuevaX < limiteIzquierdo) ? limiteIzquierdo : (nuevaX > limiteDerecho) ? limiteDerecho : nuevaX; 
 
   elemento.style.position = 'relative';
   elemento.style.left = x + "px";
   elemento.style.top = y + "px";
   
-  if (movimientoY !== 0 || movimientoX !== 0) {
-    requestAnimationFrame(moverEsfera);
-  }
+  (movimientoY !== 0 || movimientoX !== 0 ) ? requestAnimationFrame(moverEsfera) : null;
+
 }
+
