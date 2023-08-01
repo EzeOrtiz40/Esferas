@@ -99,7 +99,7 @@ const esferaObjeto = {
           },
       }    
   };
-  
+    //esferaObjeto.iniciar();
     const paleta1 = crearPaleta("w", "s");
     const paleta2 = crearPaleta("ArrowUp", "ArrowDown");
 
