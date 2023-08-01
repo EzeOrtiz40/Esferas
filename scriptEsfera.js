@@ -39,7 +39,9 @@ function moverEsfera() {
   elemento.style.position = 'relative';
   elemento.style.left = x + "px";
   elemento.style.top = y + "px";
-  
+
+ 
+
   (movimientoY !== 0 || movimientoX !== 0 ) ? requestAnimationFrame(moverEsfera) : null;
 
 }
